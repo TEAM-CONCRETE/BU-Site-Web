@@ -1,103 +1,177 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-background p-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-textprimary mb-8">
+          Tailwind CSS 컬러 테마 테스트
+        </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        {/* Primary Colors */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            Primary Colors
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-primary text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Primary</div>
+              <div className="text-sm opacity-90">#12436D</div>
+            </div>
+            <div className="bg-primary-light text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Primary Light</div>
+              <div className="text-sm opacity-90">#1F70B7</div>
+            </div>
+            <div className="bg-primary-dark text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Primary Dark</div>
+              <div className="text-sm opacity-90">#0D2F4A</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Secondary Colors */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            Secondary Colors
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-secondary text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Secondary</div>
+              <div className="text-sm opacity-90">#1F70B7</div>
+            </div>
+            <div className="bg-secondary-light text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Secondary Light</div>
+              <div className="text-sm opacity-90">#4A9BD9</div>
+            </div>
+            <div className="bg-secondary-dark text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Secondary Dark</div>
+              <div className="text-sm opacity-90">#165A8F</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Semantic Colors */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            Semantic Colors
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-success text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Success</div>
+              <div className="text-sm opacity-90">#2E7D32</div>
+            </div>
+            <div className="bg-warning text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Warning</div>
+              <div className="text-sm opacity-90">#F57C00</div>
+            </div>
+            <div className="bg-error text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Error</div>
+              <div className="text-sm opacity-90">#C62828</div>
+            </div>
+            <div className="bg-info text-white p-6 rounded-lg">
+              <div className="font-semibold mb-2">Info</div>
+              <div className="text-sm opacity-90">#0277BD</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Text Colors */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            Text Colors
+          </h2>
+          <div className="bg-gray-100 p-6 rounded-lg space-y-4">
+            <p className="text-textprimary text-lg">
+              Primary Text - 검정색에 가까운 진한 텍스트 (#0F172A)
+            </p>
+            <p className="text-textsecondary text-lg">
+              Secondary Text - 보조 텍스트 (#1E293B)
+            </p>
+            <p className="text-textmuted text-lg">
+              Muted Text - 연한 텍스트 (#475569)
+            </p>
+            <div className="bg-primary p-4 rounded mt-4">
+              <p className="text-textinverse text-lg">
+                Inverse Text - 흰색 텍스트 (배경색 위)
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Neutral Colors */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            Neutral Colors (Gray Scale)
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="bg-gray-50 border border-gray-200 p-4 rounded-lg text-center">
+              <div className="font-semibold text-gray-900 mb-1">Gray 50</div>
+              <div className="text-xs text-gray-600">#F9FAFB</div>
+            </div>
+            <div className="bg-gray-100 border border-gray-200 p-4 rounded-lg text-center">
+              <div className="font-semibold text-gray-900 mb-1">Gray 100</div>
+              <div className="text-xs text-gray-600">#F3F4F6</div>
+            </div>
+            <div className="bg-gray-200 border border-gray-300 p-4 rounded-lg text-center">
+              <div className="font-semibold text-gray-900 mb-1">Gray 200</div>
+              <div className="text-xs text-gray-600">#E5E7EB</div>
+            </div>
+            <div className="bg-gray-300 border border-gray-400 p-4 rounded-lg text-center">
+              <div className="font-semibold text-gray-900 mb-1">Gray 300</div>
+              <div className="text-xs text-gray-600">#D1D5DB</div>
+            </div>
+            <div className="bg-gray-400 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 400</div>
+              <div className="text-xs opacity-90">#9CA3AF</div>
+            </div>
+            <div className="bg-gray-500 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 500</div>
+              <div className="text-xs opacity-90">#6B7280</div>
+            </div>
+            <div className="bg-gray-600 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 600</div>
+              <div className="text-xs opacity-90">#4B5563</div>
+            </div>
+            <div className="bg-gray-700 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 700</div>
+              <div className="text-xs opacity-90">#374151</div>
+            </div>
+            <div className="bg-gray-800 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 800</div>
+              <div className="text-xs opacity-90">#1F2937</div>
+            </div>
+            <div className="bg-gray-900 text-white p-4 rounded-lg text-center">
+              <div className="font-semibold mb-1">Gray 900</div>
+              <div className="text-xs opacity-90">#111827</div>
+            </div>
+          </div>
+        </section>
+
+        {/* Usage Examples */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-textprimary mb-4">
+            사용 예시
+          </h2>
+          <div className="space-y-4">
+            <button className="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors">
+              Primary Button
+            </button>
+            <button className="bg-secondary hover:bg-secondary-dark text-white px-6 py-3 rounded-lg font-medium transition-colors ml-4">
+              Secondary Button
+            </button>
+            <div className="bg-success/10 border border-success/20 text-success px-4 py-3 rounded-lg mt-4">
+              ✅ Success 메시지 예시
+            </div>
+            <div className="bg-warning/10 border border-warning/20 text-warning px-4 py-3 rounded-lg">
+              ⚠️ Warning 메시지 예시
+            </div>
+            <div className="bg-error/10 border border-error/20 text-error px-4 py-3 rounded-lg">
+              ❌ Error 메시지 예시
+            </div>
+            <div className="bg-info/10 border border-info/20 text-info px-4 py-3 rounded-lg">
+              ℹ️ Info 메시지 예시
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
