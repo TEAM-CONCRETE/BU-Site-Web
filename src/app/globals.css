@@ -38,13 +38,6 @@
   --color-info-light: #0288d1;
   --color-info-dark: #01579b;
 
-  /* Text Colors - using separate namespace */
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #1e293b;
-  --color-text-muted: #475569;
-  --color-text-inverse: #ffffff;
-
-  /* Text Colors - alternative naming for Tailwind */
   --color-textprimary: #0f172a;
   --color-textsecondary: #1e293b;
   --color-textmuted: #475569;
@@ -73,9 +66,6 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --color-text-primary: #f9fafb;
-    --color-text-secondary: #d1d5db;
-    --color-text-muted: #9ca3af;
   }
 }
 
