@@ -1,6 +1,7 @@
-import type { StorybookConfig } from "@storybook/react-vite";
+const path = require("path");
 
-const config: StorybookConfig = {
+/** @type { import('@storybook/react-vite').StorybookConfig } */
+const config = {
   stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-essentials",
@@ -23,15 +24,15 @@ const config: StorybookConfig = {
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
-  viteFinal: async (config) => {
-    const path = await import("path");
+  async viteFinal(config) {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@": path.default.resolve(__dirname, "../src"),
+      "@": path.resolve(__dirname, "../src"),
     };
     return config;
   },
 };
 
-export default config;
+module.exports = config;
+
