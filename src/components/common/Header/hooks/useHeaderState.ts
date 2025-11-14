@@ -46,8 +46,12 @@ export function useHeaderState() {
 
   React.useEffect(() => {
     const checkCamera = async () => {
-      const isAvailable = await checkCameraAvailability();
-      setCameraStatus(isAvailable ? "normal" : "error");
+      try {
+        const isAvailable = await checkCameraAvailability();
+        setCameraStatus(isAvailable ? "normal" : "error");
+      } catch {
+        setCameraStatus("error");
+      }
     };
 
     checkCamera();
