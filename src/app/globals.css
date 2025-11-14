@@ -88,13 +88,6 @@
     --color-textmuted: #9ca3af;
     --color-textinverse: #0f172a;
   }
-
-  @theme {
-    --color-textprimary: #ededed;
-    --color-textsecondary: #d1d5db;
-    --color-textmuted: #9ca3af;
-    --color-textinverse: #0f172a;
-  }
 }
 
 body {
