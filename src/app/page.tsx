@@ -1,5 +1,3 @@
-"use client";
-
 import { Header } from "@/components/common";
 
 export default function Home() {
@@ -8,7 +6,9 @@ export default function Home() {
       <Header
         title="Build-Up 현장 출입 시스템"
         showAdminMenu
-        onAdminMenuClick={() => console.log("관리자 메뉴 클릭")}
+        onAdminMenuClick={() => {
+          // TODO: 관리자 메뉴 로직 구현
+        }}
       />
       <div className="p-8">
         <div className="max-w-7xl mx-auto">
