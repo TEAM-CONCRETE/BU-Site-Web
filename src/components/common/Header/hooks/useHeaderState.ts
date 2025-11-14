@@ -51,9 +51,24 @@ export function useHeaderState() {
     };
 
     checkCamera();
-    const interval = setInterval(checkCamera, 30000);
 
-    return () => clearInterval(interval);
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        checkCamera();
+      }
+    };
+
+    const handleFocus = () => {
+      checkCamera();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
   }, []);
 
   const networkStatusText =
