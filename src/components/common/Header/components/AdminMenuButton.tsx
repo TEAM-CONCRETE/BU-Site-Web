@@ -19,18 +19,12 @@ export function AdminMenuButton({
           "flex items-center justify-center",
           "w-9 h-9 rounded-xl",
           "bg-gray-100 hover:bg-gray-200",
-          "transition-colors"
+          "transition-colors",
+          "text-gray-700"
         )}
-        style={{
-          color: "var(--color-gray-700)",
-          backgroundColor: "var(--color-gray-100)",
-        }}
         aria-label="관리자 메뉴"
       >
-        <SettingsIcon
-          className="w-4 h-4"
-          style={{ color: "var(--color-gray-700)" }}
-        />
+        <SettingsIcon className="w-4 h-4 text-gray-700" />
       </button>
     );
   }
@@ -45,17 +39,11 @@ export function AdminMenuButton({
           "bg-gray-100 hover:bg-gray-200",
           "transition-colors",
           "text-base leading-5",
-          "w-full justify-start"
+          "w-full justify-start",
+          "text-gray-700"
         )}
-        style={{
-          color: "var(--color-gray-700)",
-          backgroundColor: "var(--color-gray-100)",
-        }}
       >
-        <SettingsIcon
-          className="w-4 h-4 shrink-0"
-          style={{ color: "var(--color-gray-700)" }}
-        />
+        <SettingsIcon className="w-4 h-4 shrink-0 text-gray-700" />
         <span>관리자 메뉴</span>
       </button>
     );
@@ -69,17 +57,11 @@ export function AdminMenuButton({
         "px-4 py-3 rounded-xl",
         "bg-gray-100 hover:bg-gray-200",
         "transition-colors",
-        "text-base leading-5"
+        "text-base leading-5",
+        "text-gray-700"
       )}
-      style={{
-        color: "var(--color-gray-700)",
-        backgroundColor: "var(--color-gray-100)",
-      }}
     >
-      <SettingsIcon
-        className="w-4 h-4 shrink-0"
-        style={{ color: "var(--color-gray-700)" }}
-      />
+      <SettingsIcon className="w-4 h-4 shrink-0 text-gray-700" />
       <span>관리자 메뉴</span>
     </button>
   );
