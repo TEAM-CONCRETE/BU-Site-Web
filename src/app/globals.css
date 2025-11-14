@@ -99,7 +99,7 @@
 
 body {
   background: var(--background);
-  color: #12436d;
+  color: var(--foreground);
   font-family:
     var(--font-pretendard),
     -apple-system,
