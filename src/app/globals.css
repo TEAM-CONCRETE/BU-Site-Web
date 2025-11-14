@@ -1,9 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* Core Variables */
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #12436d;
+  --text-secondary: #4b5563;
+  --text-muted: #4b5563;
+  --text-inverse: #ffffff;
+  --border-color: #e5e7eb;
+  --header-bg: rgba(255, 255, 255, 0.8);
+
+  --color-textprimary: #12436d;
+  --color-textsecondary: #4b5563;
+  --color-textmuted: #4b5563;
+  --color-textinverse: #ffffff;
 }
 
 @theme {
@@ -38,9 +47,9 @@
   --color-info-light: #0288d1;
   --color-info-dark: #01579b;
 
-  --color-textprimary: #0f172a;
-  --color-textsecondary: #1e293b;
-  --color-textmuted: #475569;
+  --color-textprimary: #12436d;
+  --color-textsecondary: #4b5563;
+  --color-textmuted: #4b5563;
   --color-textinverse: #ffffff;
 
   /* Neutral Colors */
@@ -56,9 +65,10 @@
   --color-gray-900: #111827;
 
   /* Fonts */
-  --font-sans: var(--font-pretendard), -apple-system, BlinkMacSystemFont,
-    system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
-    "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-sans:
+    var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
   --font-mono: var(--font-pretendard), "Courier New", monospace;
 }
 
@@ -66,11 +76,39 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-inverse: #0f172a;
+    --border-color: #1f2937;
+    --header-bg: rgba(10, 10, 10, 0.8);
+
+    /* Text Colors - for direct CSS variable access */
+    --color-textprimary: #ededed;
+    --color-textsecondary: #d1d5db;
+    --color-textmuted: #9ca3af;
+    --color-textinverse: #0f172a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family:
+    var(--font-pretendard),
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--foreground);
+  }
 }
