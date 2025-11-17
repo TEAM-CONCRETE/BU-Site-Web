@@ -14,7 +14,7 @@ export function LoginHeader() {
       </div>
 
       <div className="mb-6 text-center">
-        <h1 className="mb-2 text-2xl font-bold leading-[36px] text-primary sm:text-[30px]">
+        <h1 className="mb-2 text-2xl font-bold leading-[36px] text-foreground sm:text-[30px]">
           현장 출입 시스템 로그인
         </h1>
         <p className="text-sm leading-[23px] text-textsecondary">
