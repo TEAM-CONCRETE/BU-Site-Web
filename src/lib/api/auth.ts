@@ -25,7 +25,6 @@ export async function loginApi(request: LoginRequest): Promise<LoginResponse> {
 export interface TokenRefreshResponse {
   userId: string;
   role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
-  expiresIn: number;
 }
 
 export async function refreshTokenApi(): Promise<TokenRefreshResponse> {
