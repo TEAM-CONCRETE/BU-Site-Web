@@ -22,3 +22,22 @@ export async function loginApi(request: LoginRequest): Promise<LoginResponse> {
 
   return response.data;
 }
+
+export interface TokenRefreshResponse {
+  accessToken: string;
+  userId: string;
+  role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
+  expiresIn: number;
+}
+
+export async function refreshTokenApi(): Promise<TokenRefreshResponse> {
+  const response = await apiClient<TokenRefreshResponse>(
+    "/v1/auth/token/refresh",
+    {
+      method: "POST",
+      credentials: "include",
+    }
+  );
+
+  return response.data;
+}

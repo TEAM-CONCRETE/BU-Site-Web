@@ -22,7 +22,7 @@ export function useLogin() {
       return data;
     },
     onSuccess: (data) => {
-      setAuth(data.accessToken, data.userId, data.role);
+      setAuth(data.userId, data.role);
       router.push("/");
       router.refresh();
     },
