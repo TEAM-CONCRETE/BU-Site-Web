@@ -9,7 +9,6 @@ export interface LoginRequest {
 export interface LoginResponse {
   userId: string;
   role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
-  expiresIn: number;
 }
 
 export async function loginApi(request: LoginRequest): Promise<LoginResponse> {
