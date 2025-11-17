@@ -7,7 +7,6 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  accessToken: string;
   userId: string;
   role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
   expiresIn: number;
@@ -24,7 +23,6 @@ export async function loginApi(request: LoginRequest): Promise<LoginResponse> {
 }
 
 export interface TokenRefreshResponse {
-  accessToken: string;
   userId: string;
   role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
   expiresIn: number;
