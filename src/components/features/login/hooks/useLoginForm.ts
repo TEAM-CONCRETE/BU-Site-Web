@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLogin } from "@/components/features/login/hooks/useLogin";
 
 export interface LoginFormData {
   id: string;
@@ -13,8 +14,9 @@ export interface LoginFormErrors {
 export function useLoginForm() {
   const [id, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [rememberMe, setRememberMe] = React.useState(false);
   const [errors, setErrors] = React.useState<LoginFormErrors>({});
-  const [isLoading, setIsLoading] = React.useState(false);
+  const loginMutation = useLogin();
 
   const validateForm = React.useCallback((): boolean => {
     const newErrors: LoginFormErrors = {};
@@ -59,36 +61,53 @@ export function useLoginForm() {
         return;
       }
 
-      setIsLoading(true);
       try {
-        // login api call
-        // await loginAPI({ id, password });
-      } catch {
-        setErrors({
-          password: "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.",
+        await loginMutation.mutateAsync({
+          username: id,
+          password,
+          rememberMe,
         });
-      } finally {
-        setIsLoading(false);
+      } catch (error) {
+        setErrors({
+          password: getFriendlyErrorMessage(error),
+        });
       }
     },
-    [validateForm]
+    [validateForm, id, password, rememberMe, loginMutation]
   );
 
   const reset = React.useCallback(() => {
     setId("");
     setPassword("");
+    setRememberMe(false);
     setErrors({});
-    setIsLoading(false);
   }, []);
 
   return {
     id,
     password,
+    rememberMe,
     errors,
-    isLoading,
+    isLoading: loginMutation.isPending,
     handleIdChange,
     handlePasswordChange,
+    setRememberMe,
     handleSubmit,
     reset,
   };
+}
+
+function getFriendlyErrorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    if (
+      error.message === "Failed to fetch" ||
+      error.message.toLowerCase().includes("network")
+    ) {
+      return "서버와 연결할 수 없습니다. 잠시 후 다시 시도해주세요.";
+    }
+
+    return error.message;
+  }
+
+  return "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.";
 }
