@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "@/stores/authStore";
+import { useIsAuthenticated } from "@/stores/authStore";
 
 export function LoginRedirect() {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isAuthenticated = useIsAuthenticated();
 
   React.useEffect(() => {
     if (isAuthenticated) {

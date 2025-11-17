@@ -38,3 +38,17 @@ export async function refreshTokenApi(): Promise<TokenRefreshResponse> {
 
   return response.data;
 }
+
+export interface UserInfoResponse {
+  userId: string;
+  role: "ROLE_EMPLOYEE" | "ROLE_MANAGER" | "ROLE_ADMIN";
+}
+
+export async function getMyInfoApi(): Promise<UserInfoResponse> {
+  const response = await apiClient<UserInfoResponse>("/v1/auth/me", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  return response.data;
+}
