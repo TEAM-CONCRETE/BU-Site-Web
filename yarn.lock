@@ -2874,7 +2874,7 @@ __metadata:
     eslint: ^9
     eslint-config-next: 15.3.3
     husky: ^9.1.7
-    lightningcss-darwin-arm64: ^1.30.2
+    lightningcss: ^1.30.2
     lint-staged: ^16.2.6
     next: 15.3.3
     prettier: ^3.6.2
@@ -5118,7 +5118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss-darwin-arm64@npm:1.30.2, lightningcss-darwin-arm64@npm:^1.30.2":
+"lightningcss-darwin-arm64@npm:1.30.2":
   version: 1.30.2
   resolution: "lightningcss-darwin-arm64@npm:1.30.2"
   conditions: os=darwin & cpu=arm64
@@ -5188,7 +5188,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lightningcss@npm:1.30.2":
+"lightningcss@npm:1.30.2, lightningcss@npm:^1.30.2":
   version: 1.30.2
   resolution: "lightningcss@npm:1.30.2"
   dependencies:
