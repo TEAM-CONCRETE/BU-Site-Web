@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/components/common";
 import { Input, Button } from "@/components/ui";
 import { useAttendanceLockStore } from "@/stores/attendanceLockStore";
+import {
+  formatPhoneNumber,
+  stripPhoneNumberFormatting,
+} from "@/utils/phoneNumberFormatter";
 
 export default function AttendancePhonePage() {
   const router = useRouter();
@@ -29,9 +33,14 @@ export default function AttendancePhonePage() {
     }
   }, [hasHydrated, isProgramLocked, router]);
 
+  const handlePhoneChange = (value: string) => {
+    setError(null);
+    setPhone(formatPhoneNumber(value));
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const normalized = phone.replace(/[^0-9]/g, "");
+    const normalized = stripPhoneNumberFormatting(phone);
 
     if (normalized.length < 9 || normalized.length > 11) {
       setError("전화번호를 정확히 입력해주세요.");
@@ -65,7 +74,7 @@ export default function AttendancePhonePage() {
               label="전화번호"
               placeholder="010-1234-5678"
               value={phone}
-              onChange={(event) => setPhone(event.target.value)}
+              onChange={(event) => handlePhoneChange(event.target.value)}
               error={error ?? undefined}
               inputMode="numeric"
               autoFocus
