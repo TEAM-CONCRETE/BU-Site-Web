@@ -1,10 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
+import { useAttendanceLockStore } from "@/stores/attendanceLockStore";
 
 export type ProgramStatus = "idle" | "starting";
 
 export function useAttendanceProgram() {
+  const router = useRouter();
+  const lockProgram = useAttendanceLockStore((state) => state.lockProgram);
   const [status, setStatus] = React.useState<ProgramStatus>("idle");
   const [error, setError] = React.useState<string | null>(null);
 
@@ -12,7 +16,8 @@ export function useAttendanceProgram() {
     try {
       setError(null);
       setStatus("starting");
-      // Todo: 출퇴근 프로그램 시작 페이지로 라우팅
+      lockProgram();
+      router.push("/attendance/phone");
     } catch (err) {
       const errorMessage =
         err instanceof Error
@@ -21,7 +26,7 @@ export function useAttendanceProgram() {
       setError(errorMessage);
       setStatus("idle");
     }
-  }, []);
+  }, [lockProgram, router]);
 
   return {
     status,
