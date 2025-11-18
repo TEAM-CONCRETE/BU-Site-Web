@@ -126,19 +126,13 @@ export function useFaceCapture(): UseFaceCaptureResult {
       const detect = async () => {
         if (cancelled || !faceapiRef.current || !videoRef.current) return;
         if (videoRef.current.readyState < 2) {
-          detectionLoopRef.current = window.setTimeout(
-            detect,
-            DETECTION_INTERVAL_MS
-          );
+          scheduleNextDetection();
           return;
         }
 
         try {
           if (snapshotRef.current) {
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -155,10 +149,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
             setStatus("no_face");
             setMessage("얼굴이 보이지 않습니다. 화면을 바라봐 주세요.");
             prevCenterRef.current = null;
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -166,10 +157,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
             setStatus("multiple_faces");
             setMessage("한 명씩 촬영해주세요.");
             prevCenterRef.current = null;
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -184,10 +172,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
             .withFaceLandmarks(true);
 
           if (!detailedDetection) {
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -196,10 +181,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
           if (angle > ANGLE_THRESHOLD) {
             setStatus("not_centered");
             setMessage("정면을 향해 주세요.");
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -220,10 +202,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
           if (!movementRef.current) {
             setStatus("movement_required");
             setMessage("화면 안에서 자연스럽게 움직여 주세요.");
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
+            scheduleNextDetection();
             return;
           }
 
@@ -233,19 +212,22 @@ export function useFaceCapture(): UseFaceCaptureResult {
           setStatus("error");
           setMessage("얼굴을 감지하는 중 오류가 발생했습니다.");
         } finally {
-          if (!snapshotRef.current) {
-            detectionLoopRef.current = window.setTimeout(
-              detect,
-              DETECTION_INTERVAL_MS
-            );
-          }
+          scheduleNextDetection();
         }
       };
 
-      detectionLoopRef.current = window.setTimeout(
-        detect,
-        DETECTION_INTERVAL_MS
-      );
+      function scheduleNextDetection() {
+        if (cancelled) return;
+        if (detectionLoopRef.current) {
+          window.clearTimeout(detectionLoopRef.current);
+        }
+        detectionLoopRef.current = window.setTimeout(
+          detect,
+          DETECTION_INTERVAL_MS
+        );
+      }
+
+      scheduleNextDetection();
     };
 
     const captureSnapshot = async () => {
