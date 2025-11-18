@@ -5,6 +5,12 @@ declare module "face-api.js" {
     box: { x: number; y: number; width: number; height: number };
   }
 
+  export interface DetectSingleFaceTask {
+    withFaceLandmarks(
+      useTinyModel?: boolean
+    ): Promise<WithFaceLandmarks<FaceDetection, FaceLandmarks68> | undefined>;
+  }
+
   export interface FaceLandmarks68 {
     getLeftEye(): Point[];
     getRightEye(): Point[];
@@ -37,9 +43,5 @@ declare module "face-api.js" {
   export function detectSingleFace(
     input: HTMLVideoElement,
     options?: TinyFaceDetectorOptions
-  ): {
-    withFaceLandmarks(
-      useTinyModel?: boolean
-    ): Promise<WithFaceLandmarks<FaceDetection, FaceLandmarks68> | undefined>;
-  };
+  ): DetectSingleFaceTask;
 }
