@@ -78,48 +78,80 @@ export function useFaceCapture(): UseFaceCaptureResult {
     let stream: MediaStream | null = null;
 
     const loadModels = async () => {
-      setStatus("loading_models");
-      setMessage("AI 모델을 불러오는 중입니다.");
-      const faceapi = await import("face-api.js");
-      faceapiRef.current = faceapi;
       try {
-        await faceapi.tf.setBackend("webgl");
-      } catch (error) {
-        console.warn(
-          "Failed to set WebGL backend, falling back to default.",
-          error
-        );
+        setStatus("loading_models");
+        setMessage("AI 모델을 불러오는 중입니다.");
+        const faceapi = await import("face-api.js");
+        if (cancelled) return;
+        faceapiRef.current = faceapi;
+        try {
+          await faceapi.tf.setBackend("webgl");
+        } catch (error) {
+          console.warn(
+            "Failed to set WebGL backend, falling back to default.",
+            error
+          );
+        }
+        await faceapi.tf.ready();
+        if (cancelled) return;
+        const MODEL_URL =
+          process.env.NEXT_PUBLIC_FACE_MODEL_URL?.replace(/\/$/, "") ||
+          "/models";
+
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),
+        ]);
+
+        if (cancelled) return;
+        await initializeCamera();
+        if (cancelled) return;
+        runDetectionLoop();
+      } catch {
+        setStatus("error");
+        setMessage("AI 모델을 불러오는 중 문제가 발생했습니다.");
       }
-      await faceapi.tf.ready();
-      const MODEL_URL =
-        process.env.NEXT_PUBLIC_FACE_MODEL_URL?.replace(/\/$/, "") || "/models";
-
-      await Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-        faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),
-      ]);
-
-      if (cancelled) return;
-      await initializeCamera();
-      runDetectionLoop();
     };
 
     const initializeCamera = async () => {
-      setStatus("initializing_camera");
-      setMessage("카메라를 준비하고 있습니다.");
-      stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "user",
-          width: { ideal: 640 },
-          height: { ideal: 480 },
-        },
-        audio: false,
-      });
-      if (!videoRef.current) return;
-      videoRef.current.srcObject = stream;
-      await videoRef.current.play();
-      setStatus("waiting");
-      setMessage("카메라를 응시해 주세요.");
+      try {
+        setStatus("initializing_camera");
+        setMessage("카메라를 준비하고 있습니다.");
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "user",
+            width: { ideal: 640 },
+            height: { ideal: 480 },
+          },
+          audio: false,
+        });
+
+        if (cancelled) {
+          stopStream(stream);
+          return;
+        }
+
+        if (!videoRef.current) {
+          stopStream(stream);
+          return;
+        }
+
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
+        if (cancelled) {
+          stopStream(stream);
+          return;
+        }
+        setStatus("waiting");
+        setMessage("카메라를 응시해 주세요.");
+      } catch {
+        setStatus("error");
+        setMessage("카메라를 불러오는 중 문제가 발생했습니다.");
+        if (stream) {
+          stopStream(stream);
+          stream = null;
+        }
+      }
     };
 
     const runDetectionLoop = () => {
@@ -256,10 +288,15 @@ export function useFaceCapture(): UseFaceCaptureResult {
         window.clearTimeout(detectionLoopRef.current);
       }
       if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
+        stopStream(stream);
       }
     };
   }, []);
+
+  function stopStream(target: MediaStream | null) {
+    if (!target) return;
+    target.getTracks().forEach((track) => track.stop());
+  }
 
   return {
     videoRef,
