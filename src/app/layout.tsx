@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import { NavigationLock } from "@/components/features/attendance/NavigationLock";
+import { AdminPasswordModal } from "@/components/features/admin/AdminPasswordModal";
 
 const pretendard = localFont({
   src: "../fonts/PretendardVariable.woff2",
@@ -25,7 +27,11 @@ export default function RootLayout({
     <html lang="ko" className={pretendard.variable}>
       <body className="antialiased">
         <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <NavigationLock />
+            {children}
+            <AdminPasswordModal />
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

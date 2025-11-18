@@ -1940,6 +1940,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tensorflow/tfjs-core@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@tensorflow/tfjs-core@npm:1.7.0"
+  dependencies:
+    "@types/offscreencanvas": ~2019.3.0
+    "@types/seedrandom": 2.4.27
+    "@types/webgl-ext": 0.0.30
+    "@types/webgl2": 0.0.4
+    node-fetch: ~2.1.2
+    seedrandom: 2.4.3
+  checksum: acac92e5b7ce91a390f018bf69c15a0c09458a65e43cd25a6f1ffbc611141295ead7e0d30f637a066f4284473525a93b52cf6081f0a5b0b2b348e53f7e4b3a3a
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:10.4.0":
   version: 10.4.0
   resolution: "@testing-library/dom@npm:10.4.0"
@@ -2099,6 +2113,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/offscreencanvas@npm:~2019.3.0":
+  version: 2019.3.0
+  resolution: "@types/offscreencanvas@npm:2019.3.0"
+  checksum: 006361d170aac80925b16a8c0421d5ee7bfe6acb5cd6b22407e2c28be091becc7de5ba1fd21293a1fdff70648918d9c035001ffafd4d6c49d1c5a22dab88ed0d
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^19":
   version: 19.2.2
   resolution: "@types/react-dom@npm:19.2.2"
@@ -2124,10 +2145,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/seedrandom@npm:2.4.27":
+  version: 2.4.27
+  resolution: "@types/seedrandom@npm:2.4.27"
+  checksum: a41069fa5f280801125e24d9eebcb934f21e74d691a05cc34d727825a24ed58a4a31cbae0b47fb9bd1a9170fa9d7508b49730d0f65779b64ffed79fafb2dd0bc
+  languageName: node
+  linkType: hard
+
 "@types/uuid@npm:^9.0.1":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
   checksum: b8c60b7ba8250356b5088302583d1704a4e1a13558d143c549c408bf8920535602ffc12394ede77f8a8083511b023704bc66d1345792714002bfa261b17c5275
+  languageName: node
+  linkType: hard
+
+"@types/webgl-ext@npm:0.0.30":
+  version: 0.0.30
+  resolution: "@types/webgl-ext@npm:0.0.30"
+  checksum: c98aa8af2d24d54dc29d836aed0ca5acff45903dc91879d62110e84e615024ca071af69d1dcff26857aa2ab80c86bea9373d718616dcc61dbfdc6a6dd917a064
+  languageName: node
+  linkType: hard
+
+"@types/webgl2@npm:0.0.4":
+  version: 0.0.4
+  resolution: "@types/webgl2@npm:0.0.4"
+  checksum: b871fe8551149efdc8d74eb416983bb31d6daa3675c11fd5f2758811d68fe31ddbfca11de3f108818a1493e283d1ec878a1e3c2ba1a3a45703d1c168a76b9fa4
   languageName: node
   linkType: hard
 
@@ -2873,6 +2915,7 @@ __metadata:
     clsx: ^2.1.1
     eslint: ^9
     eslint-config-next: 15.3.3
+    face-api.js: ^0.22.2
     husky: ^9.1.7
     lightningcss: ^1.30.2
     lint-staged: ^16.2.6
@@ -4041,6 +4084,16 @@ __metadata:
   version: 3.1.3
   resolution: "exponential-backoff@npm:3.1.3"
   checksum: 471fdb70fd3d2c08a74a026973bdd4105b7832911f610ca67bbb74e39279411c1eed2f2a110c9d41c2edd89459ba58fdaba1c174beed73e7a42d773882dcff82
+  languageName: node
+  linkType: hard
+
+"face-api.js@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "face-api.js@npm:0.22.2"
+  dependencies:
+    "@tensorflow/tfjs-core": 1.7.0
+    tslib: ^1.11.1
+  checksum: d7c1368e08eff0197e6d92d124424bbdbf780c01e7e075a21b2a8f7f27465e2f0d03e48e3ba091e8af7605919917a4fd481778faa83b9fe86d2b13c2acb06597
   languageName: node
   linkType: hard
 
@@ -5719,6 +5772,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:~2.1.2":
+  version: 2.1.2
+  resolution: "node-fetch@npm:2.1.2"
+  checksum: 4c235a1c0d806046ee3874ff920e7e99200b1b1eec8df8c39318ddfb9f1d839ff738fcd0d876d1ad00f2f70ff19a7a43ab977a65260db787ce2ff335c51805ce
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 11.5.0
   resolution: "node-gyp@npm:11.5.0"
@@ -6512,6 +6572,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"seedrandom@npm:2.4.3":
+  version: 2.4.3
+  resolution: "seedrandom@npm:2.4.3"
+  checksum: 81f6b15753a8373322e76806b4d69ae668a6c097598a901939e7b4c8096d5baaf95f0c5b5de41aea6a5cfb49e9f88029c2d6c03c290e0a1f71c9462f50bd6e08
+  languageName: node
+  linkType: hard
+
 "semver@npm:^6.3.1":
   version: 6.3.1
   resolution: "semver@npm:6.3.1"
@@ -7167,6 +7234,13 @@ __metadata:
     minimist: ^1.2.6
     strip-bom: ^3.0.0
   checksum: 28c5f7bbbcabc9dabd4117e8fdc61483f6872a1c6b02a4b1c4d68c5b79d06896c3cc9547610c4c3ba64658531caa2de13ead1ea1bf321c7b53e969c4752b98c7
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^1.11.1":
+  version: 1.14.1
+  resolution: "tslib@npm:1.14.1"
+  checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
   languageName: node
   linkType: hard
 
