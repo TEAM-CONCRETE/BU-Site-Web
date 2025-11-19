@@ -156,8 +156,15 @@ export function useFaceCapture(): UseFaceCaptureResult {
 
     const runDetectionLoop = () => {
       const detect = async () => {
-        if (cancelled || !faceapiRef.current || !videoRef.current) return;
-        if (videoRef.current.readyState < 2) {
+        if (cancelled || !faceapiRef.current) return;
+        const videoElement = videoRef.current;
+
+        if (
+          !videoElement ||
+          !(videoElement instanceof HTMLVideoElement) ||
+          videoElement.readyState < 2 ||
+          !videoElement.srcObject
+        ) {
           scheduleNextDetection();
           return;
         }
@@ -170,7 +177,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
 
           const faceapi = faceapiRef.current;
           const detections = await faceapi.detectAllFaces(
-            videoRef.current,
+            videoElement,
             new faceapi.TinyFaceDetectorOptions({
               inputSize: 224,
               scoreThreshold: 0.5,
@@ -195,7 +202,7 @@ export function useFaceCapture(): UseFaceCaptureResult {
 
           const detailedDetection = await faceapi
             .detectSingleFace(
-              videoRef.current,
+              videoElement,
               new faceapi.TinyFaceDetectorOptions({
                 inputSize: 224,
                 scoreThreshold: 0.5,
@@ -263,17 +270,33 @@ export function useFaceCapture(): UseFaceCaptureResult {
     };
 
     const captureSnapshot = async () => {
-      if (!videoRef.current || !canvasRef.current) return;
+      const videoElement = videoRef.current;
+      const canvasElement = canvasRef.current;
+
+      if (
+        !videoElement ||
+        !(videoElement instanceof HTMLVideoElement) ||
+        videoElement.readyState < 2 ||
+        !canvasElement
+      ) {
+        return;
+      }
+
       setStatus("capturing");
       setMessage("스냅샷을 캡처 중입니다.");
 
-      const canvas = canvasRef.current;
-      canvas.width = videoRef.current.videoWidth;
-      canvas.height = videoRef.current.videoHeight;
-      const ctx = canvas.getContext("2d");
+      canvasElement.width = videoElement.videoWidth;
+      canvasElement.height = videoElement.videoHeight;
+      const ctx = canvasElement.getContext("2d");
       if (!ctx) return;
-      ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL("image/png");
+      ctx.drawImage(
+        videoElement,
+        0,
+        0,
+        canvasElement.width,
+        canvasElement.height
+      );
+      const dataUrl = canvasElement.toDataURL("image/png");
       snapshotRef.current = dataUrl;
       setSnapshot(dataUrl);
       setStatus("captured");

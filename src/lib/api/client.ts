@@ -20,14 +20,17 @@ export async function apiClient<T>(
   options?: RequestInit
 ): Promise<ApiResponse<T>> {
   const url = `${BASE_URL}${endpoint}`;
+  const isFormDataBody = options?.body instanceof FormData;
+  const headers = new Headers(options?.headers ?? undefined);
+
+  if (!isFormDataBody && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
 
   try {
     const response = await fetch(url, {
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...options?.headers,
-      },
+      headers,
       credentials: "include",
     });
 

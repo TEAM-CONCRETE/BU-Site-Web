@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/components/common";
 import { Input, Button } from "@/components/ui";
 import { useAttendanceLockStore } from "@/stores/attendanceLockStore";
+import { useAttendanceSessionStore } from "@/stores/attendanceSessionStore";
 import {
   formatPhoneNumber,
   stripPhoneNumberFormatting,
@@ -19,6 +20,15 @@ export default function AttendancePhonePage() {
   const openAdminModal = useAttendanceLockStore(
     (state) => state.openAdminModal
   );
+  const sessionHasHydrated = useAttendanceSessionStore(
+    (state) => state.hasHydrated
+  );
+  const setSessionPhoneNumber = useAttendanceSessionStore(
+    (state) => state.setPhoneNumber
+  );
+  const clearSessionPhoneNumber = useAttendanceSessionStore(
+    (state) => state.clearPhoneNumber
+  );
 
   const [phone, setPhone] = React.useState("");
   const [error, setError] = React.useState<string | null>(null);
@@ -32,6 +42,13 @@ export default function AttendancePhonePage() {
       router.replace("/");
     }
   }, [hasHydrated, isProgramLocked, router]);
+
+  React.useEffect(() => {
+    if (!sessionHasHydrated) {
+      return;
+    }
+    clearSessionPhoneNumber();
+  }, [clearSessionPhoneNumber, sessionHasHydrated]);
 
   const handlePhoneChange = (value: string) => {
     setError(null);
@@ -48,7 +65,7 @@ export default function AttendancePhonePage() {
     }
 
     setError(null);
-    // Todo: 전화번호 검증 및 얼굴인식 단계 초기화
+    setSessionPhoneNumber(phone);
     router.push("/attendance/face");
   };
 
